@@ -18,7 +18,7 @@ export default function FakeApiApp() {
     const loadPosts = async () => {
         const result = await fetch(URL);
         const newData = await result.json();
-        setData(newData);
+        setData(newData.sort((a, b) => b.id - a.id));
         setIsLoading(false);
     };
 
@@ -34,7 +34,9 @@ export default function FakeApiApp() {
         if (newPost.title === "" || newPost.body === "") {
             alert("Post title and body cannot be empty");
         } else {
-            setData([{ ...newPost, id: data.length + 1 }, ...data]);
+            // since we sorted from newest to oldest (highest id to smallest id) we can just take the id of the
+            // first item of the array and add 1 to it to produce the new id used for the key when mapping data
+            setData((prevData) => [{ ...newPost, id: prevData[0].id + 1 }, ...prevData]);
             setNewPost({
                 title: "",
                 body: "",
