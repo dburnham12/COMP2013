@@ -36,6 +36,8 @@ export default function FakeApiApp() {
         } else {
             // since we sorted from newest to oldest (highest id to smallest id) we can just take the id of the
             // first item of the array and add 1 to it to produce the new id used for the key when mapping data
+            // note that this would only work if the order remains the same to do any additional sorting we would
+            // have to sort a copy of the array and not the initial array itself
             setData((prevData) => [{ ...newPost, id: prevData[0].id + 1 }, ...prevData]);
             setNewPost({
                 title: "",
