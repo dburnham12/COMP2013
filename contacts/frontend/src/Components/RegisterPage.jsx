@@ -20,8 +20,9 @@ export default function RegisterPage() {
     const handleRegister = async () => {
         try {
             const response = await axios.post("http://localhost:3000/register", { ...formData });
-            setPostResponse(response.data.message);
-            navigate("/"); // navigate to login after user is created successfully
+            if (response.status === 201) {
+                navigate("/", { state: { message: response.data.message } }); // navigate to login after user is created successfully
+            }
         } catch (error) {
             setPostResponse(error.response.data.message || "Cannot add username");
         }

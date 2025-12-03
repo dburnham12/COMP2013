@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormComponent from "./FormComponent";
 import Cookies from "js-cookie";
 
@@ -11,6 +11,8 @@ export default function LoginPage() {
 
     // Navigate
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
 
     // Handlers
     const handleOnChange = (e) => {
@@ -48,6 +50,7 @@ export default function LoginPage() {
                 nextPage="register"
                 currentPage="Login"
             />
+            {state && <h3>{state.message}</h3>}
         </div>
     );
 }

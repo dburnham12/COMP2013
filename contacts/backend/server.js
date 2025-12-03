@@ -110,13 +110,13 @@ server.post("/register", async (request, response) => {
     const { username, password } = request.body;
     try {
         // Hashing a password needs bcrypt and salt rounds as an int
-        const hasedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({
             username,
-            password: hasedPassword,
+            password: hashedPassword,
         });
         await newUser.save();
-        response.send({ message: "User Created!" });
+        response.status(201).send({ message: `User ${username} Created! Please Login` });
     } catch (error) {
         response.status(500).send({ message: "User already exists, Enter a new username" });
     }
