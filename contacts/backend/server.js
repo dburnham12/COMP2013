@@ -129,7 +129,7 @@ server.post("/login", async (request, response) => {
     try {
         const user = await User.findOne({ username });
         if (!user) {
-            return response.status(404).message({ message: "User does not exist" });
+            return response.status(404).send({ message: "User does not exist" });
         }
 
         const match = await bcrypt.compare(password, user.password);

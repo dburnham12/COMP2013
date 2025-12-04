@@ -30,7 +30,7 @@ export default function LoginPage() {
                 navigate("/contacts");
             }
         } catch (error) {
-            setPostResponse(error?.response?.message || "Login Failed!");
+            setPostResponse(error?.response?.data.message || "Login Failed!");
         }
     };
 
