@@ -24,7 +24,7 @@ export default function RegisterPage() {
                 navigate("/", { state: { message: response.data.message } }); // navigate to login after user is created successfully
             }
         } catch (error) {
-            setPostResponse(error.response.data.message || "Cannot add username");
+            setPostResponse(error?.response?.data.message || "Cannot add username");
         }
     };
 

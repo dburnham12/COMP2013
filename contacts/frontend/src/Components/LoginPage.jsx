@@ -26,8 +26,8 @@ export default function LoginPage() {
             const response = await axios.post("http://localhost:3000/login", { ...formData });
             setPostResponse(response.data.message);
             if (response.status == 201) {
-                navigate("/contacts");
                 Cookies.set("jwt-authorization", response.data.token);
+                navigate("/contacts");
             }
         } catch (error) {
             setPostResponse(error?.response?.message || "Login Failed!");
